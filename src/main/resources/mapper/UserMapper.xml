@@ -46,4 +46,14 @@
             <include refid="UserTable"></include>
     </select>
 
+    <!--根据邮箱和密码查找用户-->
+    <select id="findUserByEmailAndPassword" parameterType="User" resultType="User">
+        SELECT
+            <include refid="UserField"></include>
+        FROM
+            <include refid="UserTable"></include>
+        WHERE
+            email = #{email} AND  password = #{password}
+    </select>
+
 </mapper>

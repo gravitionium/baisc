@@ -11,7 +11,9 @@ import java.util.List;
  */
 public interface UserMapper {
 
-    User findUserByUserIdAndPassword(User user);
+    User findUserByUserIdAndPassword(User user) throws Exception;
 
-    List<User> findAllUser();
+    List<User> findAllUser() throws Exception;
+
+    User findUserByEmailAndPassword(User user);
 }

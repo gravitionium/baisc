@@ -26,4 +26,32 @@ public class JsonResult<T> {
       this.data = data;
    }
 
+   public JsonResult(Integer code, String msg) {
+      this.code = code;
+      this.msg = msg;
+   }
+
+   /**
+    * 实例一个JsonResult
+    * @param code 返回代码
+    * @param msg 返回信息
+    * @param data 返回数据
+    * @return 结果
+    * @author wupanhua
+    */
+   public static JsonResult getInstent(Integer code, String msg, Object data) {
+      return new JsonResult(code, msg, data);
+   }
+
+
+   /**
+    * 实例一个JsonResult
+    * @param code 返回代码
+    * @param msg 返回信息
+    * @return 结果
+    * @author wupanhua
+    */
+   public static JsonResult getInstent(Integer code, String msg) {
+      return new JsonResult(code,msg);
+   }
 }

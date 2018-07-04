@@ -39,4 +39,26 @@ public class UserServiceImpl implements UserService {
     public List<User> findAllUser() throws Exception {
         return userMapper.findAllUser();
     }
+
+    /**
+     * 根据用户昵称和密码超找用户
+     * @param user
+     * @return 查找到的用户
+     * @author wupanhua
+     */
+    @Override
+    public User findUserIdAndPassword(User user) throws Exception {
+        return userMapper.findUserByUserIdAndPassword(user);
+    }
+
+    /**
+     * 根据用户邮箱和密码查找到用户
+     * @param user
+     * @return 查找到的用户
+     * @autor wupanhua
+     */
+    @Override
+    public User findUserByEamilAndPassword(User user) {
+        return userMapper.findUserByEmailAndPassword(user);
+    }
 }
