@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    name: basic
+    url: jdbc:mysql://127.0.0.1:3306/basic?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.cloudscope.basic.bean.po
+logging:
+  level:
+    cn.cloudscope.basic.module.user.mapper: DEBUG

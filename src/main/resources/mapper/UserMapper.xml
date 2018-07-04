@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cloudscope.basic.module.user.mapper.UserMapper">
+
+    <!--实体类字段-->
+    <sql id="UserField">
+        id,
+        userId,
+        password,
+        username,
+        gender,
+        email,
+        mobilephone,
+        telephone,
+        job,
+        groupId,
+        type,
+        status,
+        lastLoginDate,
+        createDate,
+        updateDate
+    </sql>
+
+    <!--表名-->
+    <sql id="UserTable">
+        USER
+    </sql>
+
+    <!--根据账户名和密码查找用户-->
+    <select id="findUserByUserIdAndPassword" parameterType="User" resultType="User">
+        SELECT
+            <include refid="UserField"></include>
+        FROM
+           <include refid="UserTable"></include>
+        WHERE
+            userid = #{userId} AND  password = #{password}
+    </select>
+
+    <!--查找到所有的用户-->
+    <select id="findAllUser" resultType="User">
+        SELECT
+            <include refid="UserField"></include>
+        FROM
+            <include refid="UserTable"></include>
+    </select>
+
+</mapper>
