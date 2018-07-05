@@ -49,6 +49,7 @@ public class UserController {
         user = userService.findUserIdAndPassword(user);
 
         if (user == null) {
+            // 抛出无此用户异常
             return JsonResult.getInstent(LoginStatus.FAIL.getCode(), LoginStatus.FAIL.getMsg());
         }
 
@@ -71,6 +72,7 @@ public class UserController {
         user = userService.findUserByEamilAndPassword(user);
 
         if (user == null) {
+            // 抛出无此用户异常
             return JsonResult.getInstent(LoginStatus.FAIL.getCode(), LoginStatus.FAIL.getMsg());
         }
 

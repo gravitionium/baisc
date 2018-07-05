@@ -15,9 +15,9 @@ public enum LoginStatus {
     // 信息
     private String msg;
 
-    LoginStatus(String msg, Integer code) {
-        this.msg = msg;
+    LoginStatus(Integer code, String msg) {
         this.code = code;
+        this.msg = msg;
     }
 
     public Integer getCode() {
