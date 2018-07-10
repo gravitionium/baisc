@@ -1,6 +1,8 @@
 package cn.cloudscope.basic.module.user.service.impl;
 
 import cn.cloudscope.basic.bean.po.User;
+import cn.cloudscope.basic.emum.LoginStatus;
+import cn.cloudscope.basic.exception.UserException;
 import cn.cloudscope.basic.module.user.mapper.UserMapper;
 import cn.cloudscope.basic.module.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
     /**
      * 根据用户名和密码查找用户
      * @param user 待查询
@@ -26,7 +29,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User findUserByUserIdAndPassword(User user) throws Exception {
-        return userMapper.findUserByUserIdAndPassword(user);
+
+        user = userMapper.findUserByUserIdAndPassword(user);
+        if (user == null) {
+            throw new UserException(LoginStatus.FAIL);
+        }
+        return user;
     }
 
     /**
@@ -38,17 +46,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUser() throws Exception {
         return userMapper.findAllUser();
-    }
-
-    /**
-     * 根据用户昵称和密码超找用户
-     * @param user
-     * @return 查找到的用户
-     * @author wupanhua
-     */
-    @Override
-    public User findUserIdAndPassword(User user) throws Exception {
-        return userMapper.findUserByUserIdAndPassword(user);
     }
 
     /**

@@ -43,7 +43,6 @@ public class JsonResult<T> {
       return new JsonResult(code, msg, data);
    }
 
-
    /**
     * 实例一个JsonResult
     * @param code 返回代码
@@ -54,4 +53,5 @@ public class JsonResult<T> {
    public static JsonResult getInstent(Integer code, String msg) {
       return new JsonResult(code,msg);
    }
+
 }

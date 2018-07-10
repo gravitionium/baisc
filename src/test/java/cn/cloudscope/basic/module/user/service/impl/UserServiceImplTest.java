@@ -1,6 +1,7 @@
 package cn.cloudscope.basic.module.user.service.impl;
 
 import cn.cloudscope.basic.bean.po.User;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class UserServiceImplTest {
 
     @Autowired
@@ -22,8 +24,11 @@ public class UserServiceImplTest {
 
         User user = new User();
         user.setUserId("wupanhua");
-        user.setPassword("123456");
+        user.setPassword("156");
         user = userService.findUserByUserIdAndPassword(user);
+
+        log.debug("获取到用户:{}", user.getUserId());
+        log.error("获取到用户:{}", user.getUserId());
 
     }
 

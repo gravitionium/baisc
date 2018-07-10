@@ -30,14 +30,6 @@ public interface UserService {
     List<User> findAllUser() throws Exception;
 
     /**
-     * 根据用户昵称和密码查找用户
-     * @param user
-     * @return 查找到的用户
-     * @author wupanhua
-     */
-    User findUserIdAndPassword(User user) throws Exception;
-
-    /**
      * 根据用户邮箱和密码查找到用户
      * @param user
      * @return 查找到的用户

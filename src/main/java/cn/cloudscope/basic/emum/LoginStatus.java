@@ -6,8 +6,9 @@ package cn.cloudscope.basic.emum;
  */
 public enum LoginStatus {
 
-    SUCCESS(200, "登录成功"),
-    FAIL(400, "账户或密码错误")
+    SUCCESS(100, "登录成功"),
+    FAIL(101, "账户或密码错误"),
+    VALID(102, "校验不通过"),
     ;
 
     // 状态码
