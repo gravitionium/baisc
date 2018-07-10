@@ -1,6 +1,5 @@
 package cn.cloudscope.basic.exception;
 
-import cn.cloudscope.basic.emum.LoginStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.ObjectError;
 

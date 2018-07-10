@@ -29,12 +29,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User findUserByUserIdAndPassword(User user) throws Exception {
-
-        user = userMapper.findUserByUserIdAndPassword(user);
-        if (user == null) {
-            throw new UserException(LoginStatus.FAIL);
-        }
-        return user;
+        return userMapper.findUserByUserIdAndPassword(user);
     }
 
     /**

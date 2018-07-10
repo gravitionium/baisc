@@ -1,16 +1,19 @@
 package cn.cloudscope.basic.module.user.controller;
 
+import cn.cloudscope.basic.bean.po.Role;
 import cn.cloudscope.basic.bean.po.User;
 import cn.cloudscope.basic.bean.vo.JsonResult;
 import cn.cloudscope.basic.bean.vo.LoginVo;
+import cn.cloudscope.basic.emum.ConstEnum;
 import cn.cloudscope.basic.emum.LoginStatus;
 import cn.cloudscope.basic.exception.ValidException;
+import cn.cloudscope.basic.module.role.service.RoleService;
 import cn.cloudscope.basic.module.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -30,6 +33,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 获得所有用户
@@ -59,11 +64,16 @@ public class UserController {
         User user = new User();
         BeanUtils.copyProperties(loginVo, user);
         user = userService.findUserByUserIdAndPassword(user);
+        if (user == null) {
+            return JsonResult.getInstent(LoginStatus.FAIL.getCode(), LoginStatus.FAIL.getMsg());
+        }
 
-        // 再获取到用户的角色放入session
+        List<Role> roles = roleService.findRolesByUserKey(user.getId());
 
+        // 存入session
+        session.setAttribute(ConstEnum.SESSIONUSER.getNickName(), user);
+        session.setAttribute(ConstEnum.SESSIONROLE.getNickName(), roles);
 
-        // 返回数据
         return JsonResult.getInstent(LoginStatus.SUCCESS.getCode(), LoginStatus.SUCCESS.getMsg());
     }
 
@@ -78,13 +88,6 @@ public class UserController {
     public JsonResult<User> loginByUserEmail(User user) throws Exception {
 
         user = userService.findUserByEamilAndPassword(user);
-
-        if (user == null) {
-            // 抛出无此用户异常
-            return JsonResult.getInstent(LoginStatus.FAIL.getCode(), LoginStatus.FAIL.getMsg());
-        }
-
-        // 再获取到用户的角色放入session
 
         // 返回数据
         return JsonResult.getInstent(LoginStatus.SUCCESS.getCode(), LoginStatus.SUCCESS.getMsg());

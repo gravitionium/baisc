@@ -1,7 +1,6 @@
 package cn.cloudscope.basic.exception;
 
 import cn.cloudscope.basic.emum.LoginStatus;
-import lombok.Getter;
 
 /**
  * @author wupanhua
