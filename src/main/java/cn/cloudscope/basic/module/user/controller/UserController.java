@@ -64,9 +64,6 @@ public class UserController {
         User user = new User();
         BeanUtils.copyProperties(loginVo, user);
         user = userService.findUserByUserIdAndPassword(user);
-        if (user == null) {
-            return JsonResult.getInstent(LoginStatus.FAIL.getCode(), LoginStatus.FAIL.getMsg());
-        }
 
         List<Role> roles = roleService.findRolesByUserKey(user.getId());
 
