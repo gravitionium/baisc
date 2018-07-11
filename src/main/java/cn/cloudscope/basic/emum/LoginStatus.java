@@ -9,7 +9,7 @@ public enum LoginStatus {
     SUCCESS(100, "登录成功"),
     FAIL(101, "账户或密码错误"),
     VALID(102, "校验不通过"),
-    ;
+    NOROLE(103, "用户无角色");
 
     // 状态码
     private Integer code;

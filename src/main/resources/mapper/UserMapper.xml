@@ -56,4 +56,14 @@
             email = #{email} AND  password = #{password}
     </select>
 
+    <!--更新最后登录时间-->
+    <update id="updateLastLoginDate" parameterType="User">
+        UPDATE
+            <include refid="UserTable"></include>
+        SET
+            lastlogindate = #{lastLoginDate}
+        WHERE
+            id = #{id}
+    </update>
+
 </mapper>

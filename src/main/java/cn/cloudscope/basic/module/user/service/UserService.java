@@ -19,7 +19,7 @@ public interface UserService {
      * @throws Exception
      * @author wupanhua
      */
-    User findUserByUserIdAndPassword(User user) throws Exception;
+    User loginByUserIdAndPassword(User user) throws Exception;
 
     /**
      * find all user without paging

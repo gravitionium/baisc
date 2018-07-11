@@ -25,7 +25,7 @@ public class UserServiceImplTest {
         User user = new User();
         user.setUserId("wupanhua");
         user.setPassword("156");
-        user = userService.findUserByUserIdAndPassword(user);
+        user = userService.loginByUserIdAndPassword(user);
 
         log.debug("获取到用户:{}", user.getUserId());
         log.error("获取到用户:{}", user.getUserId());

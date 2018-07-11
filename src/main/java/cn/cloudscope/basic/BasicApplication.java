@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("cn.cloudscope.basic.module.user.mapper")
+@MapperScan("cn.cloudscope.basic.module.*.mapper")
 public class BasicApplication {
 
 	public static void main(String[] args) {

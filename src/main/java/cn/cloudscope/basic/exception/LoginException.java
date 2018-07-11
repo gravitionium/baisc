@@ -6,15 +6,15 @@ import cn.cloudscope.basic.emum.LoginStatus;
  * @author wupanhua
  * @date 18-7-9
  */
-public class UserException extends RuntimeException {
+public class LoginException extends RuntimeException {
 
     private Integer code;
 
-    public UserException() {
+    public LoginException() {
         super();
     }
 
-    public UserException(LoginStatus fail) {
+    public LoginException(LoginStatus fail) {
         super(fail.getMsg());
         this.code = fail.getCode();
     }

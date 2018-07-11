@@ -9,6 +9,7 @@ import cn.cloudscope.basic.emum.LoginStatus;
 import cn.cloudscope.basic.exception.ValidException;
 import cn.cloudscope.basic.module.role.service.RoleService;
 import cn.cloudscope.basic.module.user.service.UserService;
+import cn.cloudscope.basic.utils.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 
@@ -63,13 +65,11 @@ public class UserController {
 
         User user = new User();
         BeanUtils.copyProperties(loginVo, user);
-        user = userService.findUserByUserIdAndPassword(user);
+        user = userService.loginByUserIdAndPassword(user);
 
-        List<Role> roles = roleService.findRolesByUserKey(user.getId());
-
-        // 存入session
+        // 将带有角色的用户存入session
         session.setAttribute(ConstEnum.SESSIONUSER.getNickName(), user);
-        session.setAttribute(ConstEnum.SESSIONROLE.getNickName(), roles);
+        log.info("用户: {} ,在 {} 登录成功", user.getUserId(), DateUtil.getFullStringDate(new Date()));
 
         return JsonResult.getInstent(LoginStatus.SUCCESS.getCode(), LoginStatus.SUCCESS.getMsg());
     }

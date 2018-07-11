@@ -1,7 +1,7 @@
 package cn.cloudscope.basic.handler;
 
 import cn.cloudscope.basic.bean.vo.JsonResult;
-import cn.cloudscope.basic.exception.UserException;
+import cn.cloudscope.basic.exception.LoginException;
 import cn.cloudscope.basic.exception.ValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class ExceptionCenter {
 
-    @ExceptionHandler(value = UserException.class)
+    @ExceptionHandler(value = LoginException.class)
     @ResponseBody
-    public JsonResult handler(UserException e) {
+    public JsonResult handler(LoginException e) {
         return JsonResult.getInstent(e.getCode(), e.getMessage());
     }
 

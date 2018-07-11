@@ -3,6 +3,7 @@ package cn.cloudscope.basic.bean.po;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author wupanhua
@@ -41,6 +42,8 @@ public class User {
     private Date createDate;
     /** 更新时间 */
     private Date updateDate;
+    /** 关联角色表 **/
+    private List<Role> roleArrayList;
 
     public User() {
     }

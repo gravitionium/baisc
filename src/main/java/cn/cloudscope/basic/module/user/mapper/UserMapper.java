@@ -16,4 +16,6 @@ public interface UserMapper {
     List<User> findAllUser() throws Exception;
 
     User findUserByEmailAndPassword(User user);
+
+    void updateLastLoginDate(User user);
 }
