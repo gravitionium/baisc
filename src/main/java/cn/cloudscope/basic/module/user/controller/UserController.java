@@ -1,6 +1,5 @@
 package cn.cloudscope.basic.module.user.controller;
 
-import cn.cloudscope.basic.bean.po.Role;
 import cn.cloudscope.basic.bean.po.User;
 import cn.cloudscope.basic.bean.vo.JsonResult;
 import cn.cloudscope.basic.bean.vo.LoginVo;
@@ -11,7 +10,6 @@ import cn.cloudscope.basic.module.role.service.RoleService;
 import cn.cloudscope.basic.module.user.service.UserService;
 import cn.cloudscope.basic.utils.DateUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -57,7 +55,7 @@ public class UserController {
      * @author wupanhua
      */
     @PostMapping("findByUserId")
-    public JsonResult loginByUserId(@Valid LoginVo loginVo, BindingResult bindingResult, HttpSession session) throws Exception {
+    public JsonResult loginByUserId(@RequestBody @Valid LoginVo loginVo, BindingResult bindingResult, HttpSession session) throws Exception {
 
         if (bindingResult.hasErrors()) {
             throw new ValidException(bindingResult.getAllErrors(), LoginStatus.VALID.getCode(), LoginStatus.VALID.getMsg());
@@ -88,6 +86,23 @@ public class UserController {
 
         // 返回数据
         return JsonResult.getInstent(LoginStatus.SUCCESS.getCode(), LoginStatus.SUCCESS.getMsg());
+    }
+
+    /**
+     * 登录系统
+     * @param session
+     * @return
+     * @throws Exception
+     * @author wupanhua
+     */
+    @GetMapping("logout")
+    public JsonResult<User> logout(HttpSession session) throws Exception {
+        User user = (User)session.getAttribute(ConstEnum.SESSIONUSER.getNickName());
+        if (user != null) {
+            log.info("用户: {} , 在 {} 登出系统", user.getUserId(), DateUtil.getFullStringDate(new Date()));
+            session.removeAttribute(ConstEnum.SESSIONUSER.getNickName());
+        }
+        return JsonResult.getInstent(LoginStatus.LOGOUT.getCode(), LoginStatus.LOGOUT.getMsg());
     }
 
 }
